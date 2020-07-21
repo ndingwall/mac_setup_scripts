@@ -8,24 +8,33 @@ CURDIR=$(dirname "$0")
 brew install brew-cask
 
 # Install applications
-brew cask install alfred google-chrome iterm2 macdown pycharm-ce sizeup slack spotify sublime-text vlc workflowy zoom
+brew cask install alfred google-chrome iterm2 macdown pycharm-ce slack spotify sublime-text vlc workflowy zoom
 
 # Install fonts
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 brew cask install font-source-code-pro
 
 brew install python3 git vim
 #tmux macvim fasd htop the_silver_searcher reattach-to-user-namespace ctags
 
 # Virtualenv stuff
-pip3 install virtualenv virtualenvwrapper
-echo 'export WORKON_HOME=~/Envs' >> ~/.bashrc
-echo 'mkdir -p $WORKON_HOME' >> ~/.basrhc
-/Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages
+brew install pyenv
+brew install pyenv-virtualenv
+# Setup for Python virtual environments.
+echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
 
 # Save screenshots to ~/Screenshots
 mkdir ~/Screenshots
 defaults write com.apple.screencapture location ~/Screenshots
+
+# Store more history, see https://www.shellhacks.com/tune-command-line-history-bash/
+echo '\n# History management' >> ~/.bashrc
+echo 'export HISTSIZE=10000' >> ~/.bashrc
+echo 'export HISTFILESIZE=10000' >> ~/.bashrc
+echo 'shopt -s histappend' >> ~/.bashrc
+echo 'PROMPT_COMMAND="history -a"' >> ~/.bashrc
+echo 'export HISTIGNORE="ls:ps:history"' >> ~/.bashrc
 
 # Install git completion
 # This also changes PS1
